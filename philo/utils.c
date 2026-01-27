@@ -1,19 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dprudnik <dprudnik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/14 16:24:17 by dprudnik          #+#    #+#             */
-/*   Updated: 2026/01/27 17:26:24 by dprudnik         ###   ########.fr       */
+/*   Created: 2026/01/27 17:30:07 by dprudnik          #+#    #+#             */
+/*   Updated: 2026/01/27 17:31:07 by dprudnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+int	ft_atoi(const char *nptr)
 {
+	int	result;
+	int	sign;
 
-	return (0);
+	result = 0;
+	sign = 1;
+	while (*nptr == ' ' || *nptr == '\t' || *nptr == '\n'
+		|| *nptr == '\v' || *nptr == '\f' || *nptr == '\r')
+	{
+		nptr++;
+	}
+	if (*nptr == '-' || *nptr == '+')
+	{
+		if (*nptr == '-')
+			sign = -1;
+		nptr++;
+	}
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		result = result * 10 + (*nptr - '0');
+		nptr++;
+	}
+	return (result * sign);
 }

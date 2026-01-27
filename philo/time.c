@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dprudnik <dprudnik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/14 16:24:17 by dprudnik          #+#    #+#             */
-/*   Updated: 2026/01/27 17:26:24 by dprudnik         ###   ########.fr       */
+/*   Created: 2026/01/27 17:17:23 by dprudnik          #+#    #+#             */
+/*   Updated: 2026/01/27 17:17:39 by dprudnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+void	gettime()
 {
+	struct timeval blah;
 
+	gettimeofday(&blah, NULL);
+
+	printf("sec:%ld, msec:%ld\n", blah.tv_sec , blah.tv_usec);
 	return (0);
 }

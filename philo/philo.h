@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philos.h                                           :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dprudnik <dprudnik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 16:57:06 by dprudnik          #+#    #+#             */
-/*   Updated: 2026/01/14 16:58:31 by dprudnik         ###   ########.fr       */
+/*   Updated: 2026/01/27 17:47:08 by dprudnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,20 @@
 
 # include <stdio.h>
 # include <pthread.h>
+# include <sys/time.h>
+
+typedef struct	s_philos
+{
+	
+
+}				t_philos;
+
+
+typedef struct	s_resources
+{
+
+	int		*forks;
+}				t_resources;
 
 
 # endif

@@ -6,7 +6,7 @@
 /*   By: dprudnik <dprudnik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 16:24:17 by dprudnik          #+#    #+#             */
-/*   Updated: 2026/01/27 17:26:24 by dprudnik         ###   ########.fr       */
+/*   Updated: 2026/04/21 17:54:01 by dprudnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	main(int argc, char **argv)
 {
-
-	return (0);
+	if ()
+		return (0);
 }

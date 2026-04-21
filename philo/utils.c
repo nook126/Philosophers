@@ -6,7 +6,7 @@
 /*   By: dprudnik <dprudnik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 17:30:07 by dprudnik          #+#    #+#             */
-/*   Updated: 2026/01/27 17:31:07 by dprudnik         ###   ########.fr       */
+/*   Updated: 2026/04/21 15:45:16 by dprudnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_atoi(const char *nptr)
 {
 	int	result;
 	int	sign;
+
 
 	result = 0;
 	sign = 1;

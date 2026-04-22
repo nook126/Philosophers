@@ -6,7 +6,7 @@
 /*   By: dprudnik <dprudnik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 17:17:23 by dprudnik          #+#    #+#             */
-/*   Updated: 2026/04/21 16:09:47 by dprudnik         ###   ########.fr       */
+/*   Updated: 2026/04/22 15:28:02 by dprudnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,4 @@ void	gettime()
 	gettimeofday(&blah, NULL);
 
 	printf("sec:%ld, msec:%ld\n", blah.tv_sec , blah.tv_usec);
-	return (0);
 }

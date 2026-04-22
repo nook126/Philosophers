@@ -1,0 +1,17 @@
+[
+  {
+    "directory": "/home/dprudnik/Github/Philosophers",
+    "command": "cc -Wall -Wextra -Werror -I. -c main.c",
+    "file": "main.c"
+  },
+  {
+    "directory": "/full/path/to/philo",
+    "command": "cc -Wall -Wextra -Werror -I. -c utils.c",
+    "file": "utils.c"
+  },
+  {
+    "directory": "/full/path/to/philo",
+    "command": "cc -Wall -Wextra -Werror -I. -c time.c",
+    "file": "time.c"
+  }
+]

@@ -6,7 +6,7 @@
 /*   By: dprudnik <dprudnik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 16:57:06 by dprudnik          #+#    #+#             */
-/*   Updated: 2026/04/21 15:37:01 by dprudnik         ###   ########.fr       */
+/*   Updated: 2026/04/22 17:14:44 by dprudnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILOS_H
 
 # include <stdio.h>
+# include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
 
@@ -25,7 +26,7 @@ typedef struct	s_philosopher
 	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
-	t_data			*data;
+	// t_data			*data;
 
 }				t_philosopher;
 
@@ -47,5 +48,14 @@ typedef struct		s_data
 	t_philosopher	*philos;
 }					t_data;
 
+
+//init.c
+int	init_philos(t_data *data, int argc, char **argv);
+
+//utils.c
+int	ft_atoi(const char *nptr);
+
+//clean_up.c
+void	cleanup_data(t_data *data);
 
 # endif

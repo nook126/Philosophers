@@ -1,0 +1,34 @@
+NAME = philo
+
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g
+
+INCLUDES = -Iincludes/
+
+SRCS =	src/main.c \
+		src/init.c \
+		src/time.c \
+		src/utils.c \
+		src/clean_up.c
+
+OBJ_DIR = obj
+OBJS = $(SRCS:src/%.c=$(OBJ_DIR)/%.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(NAME)
+
+$(OBJ_DIR)/%.o: src/%.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+clean:
+	rm -rf $(OBJ_DIR)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re

@@ -6,12 +6,16 @@
 /*   By: dprudnik <dprudnik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 16:24:17 by dprudnik          #+#    #+#             */
-/*   Updated: 2026/04/23 11:36:35 by dprudnik         ###   ########.fr       */
+/*   Updated: 2026/04/23 16:47:03 by dprudnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void	life_time(t_data *data)
+{
+
+}
 
 int	main(int argc, char **argv)
 {

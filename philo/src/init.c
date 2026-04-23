@@ -6,7 +6,7 @@
 /*   By: dprudnik <dprudnik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:30:56 by dprudnik          #+#    #+#             */
-/*   Updated: 2026/04/22 17:22:35 by dprudnik         ###   ########.fr       */
+/*   Updated: 2026/04/23 16:46:46 by dprudnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ int	init_philos(t_data *data, int argc, char **argv)
 		data->must_eat_count = 0;
 	create_philos(data);
 	create_forks(data);
-	print_data(data);
+	// print_data(data);
 	return (1);
 }

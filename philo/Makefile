@@ -1,15 +1,16 @@
 NAME = philo
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -pthread
 
 INCLUDES = -Iincludes/
 
 SRCS =	src/main.c \
 		src/init.c \
-		src/time.c \
+		src/log.c \
 		src/utils.c \
-		src/clean_up.c
+		src/clean_up.c \
+		src/events.c
 
 OBJ_DIR = obj
 OBJS = $(SRCS:src/%.c=$(OBJ_DIR)/%.o)

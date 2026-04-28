@@ -38,6 +38,7 @@ void	init_mutexes(t_data *data)
 	}
 	pthread_mutex_init(&data->print_mutex, NULL);
 	pthread_mutex_init(&data->death_mutex, NULL);
+	data->death_flag = 0;
 }
 
 int	init_philos(t_data *data)
@@ -49,15 +50,20 @@ int	init_philos(t_data *data)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].eat_count = 0;
+		data->philos[i].last_meal_timestamp = time_stamp(data);
+		data->philos[i].data = data;
 		data->philos[i].left_fork = &data->forks[i %data->philo_count];
 		if (data->philo_count == 1)
 			data->philos[i].right_fork = NULL;
 		else
 			data->philos[i].right_fork = &data->forks[(i + 1) %data->philo_count];
-		if (pthread_create(&data->philos[i].thread, NULL, &life_time, data) != 0)
+		if (pthread_create(&data->philos[i].thread, NULL, &life_time,
+					&data->philos[i]) != 0)
 			return (-1);
 		i++;
 	}
+	if (pthread_create(&data->monitor_thread, NULL, &monitor_thread, data) != 0)
+		return (-1);
 	return (0);
 }
 
@@ -80,3 +86,4 @@ int	init_data(t_data *data, int argc, char **argv)
 		return (-1);
 	return (0);
 }
+

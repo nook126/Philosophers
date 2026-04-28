@@ -14,51 +14,59 @@
 #define PHILOS_H
 
 #include <pthread.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
 #include <unistd.h>
 
-typedef enum  e_event
+typedef struct s_data t_data;
+
+typedef enum	e_event
 {
   FORK_TAKEN,
   EATING,
   SLEEPING,
   THINKING,
   DIED
-}             t_event;
+}				t_event;
 
-typedef struct s_philosopher {
-  size_t id;
+typedef struct		s_philosopher
+{
+  size_t			id;
 
-  size_t eat_count;
-  pthread_t thread;
-  pthread_mutex_t *left_fork;
-  pthread_mutex_t *right_fork;
-} t_philosopher;
+  size_t			eat_count;
+  long				last_meal_timestamp;
+  pthread_t			thread;
+  t_data				*data;
+  pthread_mutex_t	*left_fork;
+  pthread_mutex_t	*right_fork;
+}					t_philosopher;
 
-typedef struct s_data {
-  size_t philo_count;
-  size_t time_to_die;
-  size_t time_to_eat;
-  size_t time_to_sleep;
-  size_t must_eat_count;
+typedef struct		s_data
+{
+  size_t			philo_count;
+  size_t			time_to_die;
+  size_t			time_to_eat;
+  size_t			time_to_sleep;
+  size_t			must_eat_count;
 
-  long start_time;
+  long				start_time;
 
-  pthread_mutex_t print_mutex;
-  pthread_mutex_t death_mutex;
+  pthread_mutex_t	print_mutex;
+  pthread_mutex_t	death_mutex;
+  size_t			death_flag;
 
-  pthread_t monitor_thread;
-  pthread_mutex_t *forks;
-  t_philosopher *philos;
-} t_data;
+  pthread_t			monitor_thread;
+  pthread_mutex_t	*forks;
+  t_philosopher		*philos;
+}					t_data;
 
 // clean_up.c
-int cleanup_data(t_data *data);
+int	cleanup_data(t_data *data);
 
 //events.c
-int eat_event(t_data *data, t_philosopher *philo);
+int	eat_event(t_data *data, t_philosopher *philo);
 
 // init.c
 int create_philos(t_data *data);
@@ -73,9 +81,10 @@ long time_stamp(t_data *data);
 void log_event(t_data *data, size_t id, t_event event);
 
 // main.c
-void *life_time(void *arg);
+void	*life_time(void *arg);
+void	*monitor_thread(void *arg);
 
 // utils.c
-int ft_atoi(const char *nptr);
+int	ft_atoi(const char *nptr);
 
 #endif

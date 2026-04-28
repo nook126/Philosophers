@@ -14,14 +14,16 @@
 
 int	create_philos(t_data *data)
 {
-	if (!(data->philos = malloc(data->philo_count * sizeof(t_philosopher))))
+	data->philos = malloc(data->philo_count * sizeof(t_philosopher));
+	if (!data->philos)
 		return (-1);
 	return (0);
 }
 
 int	create_forks(t_data *data)
 {
-	if (!(data->forks = malloc(data->philo_count * sizeof(pthread_mutex_t))))
+	data->forks = malloc(data->philo_count * sizeof(pthread_mutex_t));
+	if (!data->forks)
 		return (-1);
 	return (0);
 }
@@ -49,16 +51,18 @@ int	init_philos(t_data *data)
 	while (i < data->philo_count)
 	{
 		data->philos[i].id = i + 1;
+		printf("created philo[%lu]\n", data->philos[i].id);
 		data->philos[i].eat_count = 0;
 		data->philos[i].last_meal_timestamp = time_stamp(data);
 		data->philos[i].data = data;
-		data->philos[i].left_fork = &data->forks[i %data->philo_count];
+		data->philos[i].left_fork = &data->forks[i % data->philo_count];
 		if (data->philo_count == 1)
 			data->philos[i].right_fork = NULL;
 		else
-			data->philos[i].right_fork = &data->forks[(i + 1) %data->philo_count];
+			data->philos[i].right_fork = &data->forks[(i + 1)
+				% data->philo_count];
 		if (pthread_create(&data->philos[i].thread, NULL, &life_time,
-					&data->philos[i]) != 0)
+				&data->philos[i]) != 0)
 			return (-1);
 		i++;
 	}
@@ -84,6 +88,6 @@ int	init_data(t_data *data, int argc, char **argv)
 	init_mutexes(data);
 	if (init_philos(data) != 0)
 		return (-1);
+	data->start_time = time_stamp(data);
 	return (0);
 }
-

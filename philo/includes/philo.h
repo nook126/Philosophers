@@ -66,7 +66,11 @@ typedef struct		s_data
 int	cleanup_data(t_data *data);
 
 //events.c
+int	takeforks_event(t_data *data, t_philosopher *philo);
+int	returnforks_event(t_data *data, t_philosopher *philo);
 int	eat_event(t_data *data, t_philosopher *philo);
+int	sleep_event(t_data *data, t_philosopher *philo);
+int	think_event(t_data *data, t_philosopher *philo);
 
 // init.c
 int create_philos(t_data *data);

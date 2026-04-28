@@ -12,28 +12,30 @@
 
 #include "philo.h"
 
-void	eat_event(t_data *data, t_philosopher *philo)
+//TODO: death check before each event.
+//TODO: check if death has happend after lock to exit.
+int eat_event(t_data *data, t_philosopher *philo)
 {
-	if (data->philo_count == 1)
-	{
-		pthread_mutex_lock(philo->left_fork);
-		log_event(data, philo->id, FORK_TAKEN);
+  if (data->philo_count == 1)
+  {
+    pthread_mutex_lock(philo->left_fork);
+    log_event(data, philo->id, FORK_TAKEN);
 
-		pthread_mutex_unlock(philo->left_fork);
-		return ;
-	}
-	//Might need to add logic for left or right fork first to prevent deadlock!
-	pthread_mutex_lock(philo->left_fork);
-	log_event(data, philo->id, FORK_TAKEN);
-	pthread_mutex_lock(philo->right_fork);
-	log_event(data, philo->id, FORK_TAKEN);
-	usleep(data->time_to_eat * 1000);
-	pthread_mutex_unlock(philo->right_fork);
-	pthread_mutex_unlock(philo->left_fork);
+    pthread_mutex_unlock(philo->left_fork);
+    return (0);
+  }
+  // Might need to add logic for left or right fork first to prevent deadlock!
+  pthread_mutex_lock(philo->left_fork);
+  log_event(data, philo->id, FORK_TAKEN);
+  pthread_mutex_lock(philo->right_fork);
+  log_event(data, philo->id, FORK_TAKEN);
+  usleep(data->time_to_eat * 1000);
+  pthread_mutex_unlock(philo->right_fork);
+  pthread_mutex_unlock(philo->left_fork);
+  return (0);
 }
 
-
-void	sleep_event(t_data *data, t_philosopher *philo)
-{
-
-}
+// void	sleep_event(t_data *data, t_philosopher *philo)
+// {
+//
+// }

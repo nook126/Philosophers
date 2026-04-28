@@ -12,14 +12,15 @@
 
 #include "philo.h"
 
+//TODO: destroy monitor_thread
 int	cleanup_data(t_data *data)
 {
-	size_t	i;
+  size_t	i;
 
-	if (!data->philos || !data->forks)
-		return (-1);
-	free(data->philos);
-	i = 0;
+  if (!data->philos || !data->forks)
+   return (-1);
+  free(data->philos);
+  i = 0;
 	while (i < data->philo_count)
 	{
 		pthread_mutex_destroy(&data->forks[i]);
@@ -27,8 +28,10 @@ int	cleanup_data(t_data *data)
 			return (-1);
 		i++;
 	}
+	if (pthread_join(data->monitor_thread, NULL) != 0)
+	  return (-1);
 	free(data->forks);
 	pthread_mutex_destroy(&data->print_mutex);
 	pthread_mutex_destroy(&data->death_mutex);
-	return (0);
+  return (0);
 }

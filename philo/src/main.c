@@ -6,7 +6,7 @@
 /*   By: dprudnik <dprudnik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 16:24:17 by dprudnik          #+#    #+#             */
-/*   Updated: 2026/04/24 15:44:20 by dprudnik         ###   ########.fr       */
+/*   Updated: 2026/04/29 14:20:38 by dprudnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ void	print_data(t_data *data)//DEBUG ONLY!
 	printf("data->must_eat_count:%zu\n", data->must_eat_count);
 }
 
-//TODO: handle returns of event functions
+// TODO: handle returns of event functions
 void	*life_time(void *arg)
 {
 	t_philosopher	*philo;
 	size_t			i;
 
 	philo = (t_philosopher *)arg;
+	printf("DEBUG: entered life_time_thread\n");//DEBUG !
 	i = 0;
 	while (i < philo->data->must_eat_count)
 	{
-		takeforks_event(philo->data, philo);
-		eat_event(philo->data, philo);
-		returnforks_event(philo->data, philo);
+		if (eat_event(philo->data, philo))
+			return (NULL);
 		sleep_event(philo->data, philo);
 		think_event(philo->data, philo);
 		if (philo->data->must_eat_count == 0)
@@ -50,6 +50,7 @@ void	*monitor_thread(void *arg)
 	size_t	i;
 
 	data = (t_data *)arg;
+	printf("DEBUG: entered monitor_thread\n");//DEBUG !
 	i = 0;
 	while (1)
 	{
@@ -80,7 +81,9 @@ int	main(int argc, char **argv)
 		printf("Usage: ./philo <#philos> <die> <eat> <sleep> [<# of eats>]");
 		return (1);
 	}
-	init_data(&data, argc, argv);
-	cleanup_data(&data);
+	if (init_data(&data, argc, argv) == -1)
+		return (1);
+	if (cleanup_data(&data) == -1)
+		return (1);
 	return (0);
 }

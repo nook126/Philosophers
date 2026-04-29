@@ -6,7 +6,7 @@
 /*   By: dprudnik <dprudnik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 16:57:06 by dprudnik          #+#    #+#             */
-/*   Updated: 2026/04/24 15:44:45 by dprudnik         ###   ########.fr       */
+/*   Updated: 2026/04/29 15:35:01 by dprudnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,21 +66,26 @@ typedef struct		s_data
 int	cleanup_data(t_data *data);
 
 //events.c
-int	takeforks_event(t_data *data, t_philosopher *philo);
-int	returnforks_event(t_data *data, t_philosopher *philo);
 int	eat_event(t_data *data, t_philosopher *philo);
 int	sleep_event(t_data *data, t_philosopher *philo);
 int	think_event(t_data *data, t_philosopher *philo);
 
+//forks.c
+int	takeforks_event(t_data *data, t_philosopher *philo);
+int	returnforks_event(t_data *data, t_philosopher *philo);
+
 // init.c
-int create_philos(t_data *data);
-int create_forks(t_data *data);
 void init_mutexes(t_data *data);
-int init_philos(t_data *data);
+void init_philos(t_data *data);
+int init_threads(t_data *data);
 int init_data(t_data *data, int argc, char **argv);
 
+//init_utils.c
+int create_philos(t_data *data);
+int create_forks(t_data *data);
+
 // log.c
-long get_time();
+long get_time(void);
 long time_stamp(t_data *data);
 void log_event(t_data *data, size_t id, t_event event);
 

@@ -6,27 +6,11 @@
 /*   By: dprudnik <dprudnik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:30:56 by dprudnik          #+#    #+#             */
-/*   Updated: 2026/04/24 15:11:52 by dprudnik         ###   ########.fr       */
+/*   Updated: 2026/04/29 15:40:44 by dprudnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	create_philos(t_data *data)
-{
-	data->philos = malloc(data->philo_count * sizeof(t_philosopher));
-	if (!data->philos)
-		return (-1);
-	return (0);
-}
-
-int	create_forks(t_data *data)
-{
-	data->forks = malloc(data->philo_count * sizeof(pthread_mutex_t));
-	if (!data->forks)
-		return (-1);
-	return (0);
-}
 
 void	init_mutexes(t_data *data)
 {
@@ -43,7 +27,7 @@ void	init_mutexes(t_data *data)
 	data->death_flag = 0;
 }
 
-int	init_philos(t_data *data)
+void	init_philos(t_data *data)
 {
 	size_t	i;
 
@@ -51,7 +35,7 @@ int	init_philos(t_data *data)
 	while (i < data->philo_count)
 	{
 		data->philos[i].id = i + 1;
-		printf("created philo[%lu]\n", data->philos[i].id);
+		printf("DEBUG: created PHILO id: %lu\n", data->philos[i].id);//DEBUG Only!
 		data->philos[i].eat_count = 0;
 		data->philos[i].last_meal_timestamp = time_stamp(data);
 		data->philos[i].data = data;
@@ -61,13 +45,28 @@ int	init_philos(t_data *data)
 		else
 			data->philos[i].right_fork = &data->forks[(i + 1)
 				% data->philo_count];
+		i++;
+	}
+}
+
+int	init_threads(t_data *data)
+{
+	size_t	i;
+
+	if (pthread_create(&data->monitor_thread, NULL, &monitor_thread,
+			data) != 0)
+		return (-1);
+	i = 0;
+	while (i < data->philo_count)
+	{
 		if (pthread_create(&data->philos[i].thread, NULL, &life_time,
 				&data->philos[i]) != 0)
 			return (-1);
+		pthread_detach(data->philos[i].thread);
 		i++;
 	}
-	if (pthread_create(&data->monitor_thread, NULL, &monitor_thread, data) != 0)
-		return (-1);
+	// pthread_detach(data->monitor_thread);//using pthread_join on monitor_thread.
+	printf("DEBUG: init_threads finnished\n");//DEBUG !
 	return (0);
 }
 
@@ -81,13 +80,16 @@ int	init_data(t_data *data, int argc, char **argv)
 		data->must_eat_count = ft_atoi(argv[5]);
 	else
 		data->must_eat_count = 0;
+	data->start_time = get_time();
+	usleep(5 * 1000);
+	printf("DEBUG: start_time time_stamp: %lu\n", time_stamp(data));
 	if (create_philos(data) != 0)
 		return (-1);
 	if (create_forks(data) != 0)
 		return (-1);
 	init_mutexes(data);
-	if (init_philos(data) != 0)
+	init_philos(data);
+	if (init_threads(data) != 0)
 		return (-1);
-	data->start_time = time_stamp(data);
 	return (0);
 }

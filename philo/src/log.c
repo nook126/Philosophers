@@ -6,13 +6,13 @@
 /*   By: dprudnik <dprudnik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 17:17:23 by dprudnik          #+#    #+#             */
-/*   Updated: 2026/04/24 15:11:56 by dprudnik         ###   ########.fr       */
+/*   Updated: 2026/04/29 15:38:46 by dprudnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	gettime(void)
+long	get_time(void)
 {
 	struct timeval	tv;
 	long			time_stamp;
@@ -27,7 +27,7 @@ long	time_stamp(t_data *data)
 {
 	long	diff;
 
-	diff = gettime() - data->start_time;
+	diff = get_time() - data->start_time;
 	return (diff);
 }
 

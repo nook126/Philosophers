@@ -5,12 +5,14 @@ CFLAGS = -Wall -Wextra -Werror -g -pthread
 
 INCLUDES = -Iincludes/
 
-SRCS =	src/main.c \
+SRCS =	src/clean_up.c \
+		src/events.c \
+		src/forks.c \
 		src/init.c \
+		src/init_utils.c \
 		src/log.c \
-		src/utils.c \
-		src/clean_up.c \
-		src/events.c
+		src/main.c \
+		src/utils.c
 
 OBJ_DIR = obj
 OBJS = $(SRCS:src/%.c=$(OBJ_DIR)/%.o)

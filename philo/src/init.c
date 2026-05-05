@@ -18,10 +18,10 @@ void	init_mutexes(t_data *data)
 
 	i = 0;
 	while (i < data->philo_count)
-	{
-		pthread_mutex_init(&data->forks[i], NULL);
-		i++;
-	}
+		pthread_mutex_init(&data->forks[i++], NULL);
+	i = 0;
+	while (i < data->philo_count)
+		pthread_mutex_init(&data->philos[i++].meal_mutex, NULL);
 	pthread_mutex_init(&data->print_mutex, NULL);
 	pthread_mutex_init(&data->death_mutex, NULL);
 	data->death_flag = 0;
@@ -35,7 +35,6 @@ void	init_philos(t_data *data)
 	while (i < data->philo_count)
 	{
 		data->philos[i].id = i + 1;
-		printf("DEBUG: created PHILO id: %lu\n", data->philos[i].id);//DEBUG Only!
 		data->philos[i].eat_count = 0;
 		data->philos[i].last_meal_timestamp = time_stamp(data);
 		data->philos[i].data = data;
@@ -62,11 +61,10 @@ int	init_threads(t_data *data)
 		if (pthread_create(&data->philos[i].thread, NULL, &life_time,
 				&data->philos[i]) != 0)
 			return (-1);
-		pthread_detach(data->philos[i].thread);
+		// pthread_detach(data->philos[i].thread);
 		i++;
 	}
-	// pthread_detach(data->monitor_thread);//using pthread_join on monitor_thread.
-	printf("DEBUG: init_threads finnished\n");//DEBUG !
+	pthread_detach(data->monitor_thread);//using pthread_join on monitor_thread.
 	return (0);
 }
 
@@ -81,8 +79,6 @@ int	init_data(t_data *data, int argc, char **argv)
 	else
 		data->must_eat_count = 0;
 	data->start_time = get_time();
-	usleep(5 * 1000);
-	printf("DEBUG: start_time time_stamp: %lu\n", time_stamp(data));
 	if (create_philos(data) != 0)
 		return (-1);
 	if (create_forks(data) != 0)

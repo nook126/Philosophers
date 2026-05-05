@@ -1,32 +1,37 @@
 [
     {
-        "command": "cc -c -Wall -Wextra -Werror -g -pthread -Iincludes/ -o obj/main.o src/main.c",
-        "directory": "/home/dprudnik/Github/Philosophers/philo",
-        "file": "/home/dprudnik/Github/Philosophers/philo/src/main.c"
-    },
-    {
-        "command": "cc -c -Wall -Wextra -Werror -g -pthread -Iincludes/ -o obj/init.o src/init.c",
-        "directory": "/home/dprudnik/Github/Philosophers/philo",
-        "file": "/home/dprudnik/Github/Philosophers/philo/src/init.c"
-    },
-    {
-        "command": "cc -c -Wall -Wextra -Werror -g -pthread -Iincludes/ -o obj/log.o src/log.c",
-        "directory": "/home/dprudnik/Github/Philosophers/philo",
-        "file": "/home/dprudnik/Github/Philosophers/philo/src/log.c"
-    },
-    {
-        "command": "cc -c -Wall -Wextra -Werror -g -pthread -Iincludes/ -o obj/utils.o src/utils.c",
-        "directory": "/home/dprudnik/Github/Philosophers/philo",
-        "file": "/home/dprudnik/Github/Philosophers/philo/src/utils.c"
-    },
-    {
         "command": "cc -c -Wall -Wextra -Werror -g -pthread -Iincludes/ -o obj/clean_up.o src/clean_up.c",
-        "directory": "/home/dprudnik/Github/Philosophers/philo",
-        "file": "/home/dprudnik/Github/Philosophers/philo/src/clean_up.c"
+        "directory": "/home/denis/Github/Philosophers/philo",
+        "file": "/home/denis/Github/Philosophers/philo/src/clean_up.c"
     },
     {
         "command": "cc -c -Wall -Wextra -Werror -g -pthread -Iincludes/ -o obj/events.o src/events.c",
-        "directory": "/home/dprudnik/Github/Philosophers/philo",
-        "file": "/home/dprudnik/Github/Philosophers/philo/src/events.c"
+        "directory": "/home/denis/Github/Philosophers/philo",
+        "file": "/home/denis/Github/Philosophers/philo/src/events.c"
+    },
+    {
+        "command": "cc -c -Wall -Wextra -Werror -g -pthread -Iincludes/ -o obj/forks.o src/forks.c",
+        "directory": "/home/denis/Github/Philosophers/philo",
+        "file": "/home/denis/Github/Philosophers/philo/src/forks.c"
+    },
+    {
+        "command": "cc -c -Wall -Wextra -Werror -g -pthread -Iincludes/ -o obj/init.o src/init.c",
+        "directory": "/home/denis/Github/Philosophers/philo",
+        "file": "/home/denis/Github/Philosophers/philo/src/init.c"
+    },
+    {
+        "command": "cc -c -Wall -Wextra -Werror -g -pthread -Iincludes/ -o obj/init_utils.o src/init_utils.c",
+        "directory": "/home/denis/Github/Philosophers/philo",
+        "file": "/home/denis/Github/Philosophers/philo/src/init_utils.c"
+    },
+    {
+        "command": "cc -c -Wall -Wextra -Werror -g -pthread -Iincludes/ -o obj/log.o src/log.c",
+        "directory": "/home/denis/Github/Philosophers/philo",
+        "file": "/home/denis/Github/Philosophers/philo/src/log.c"
+    },
+    {
+        "command": "cc -c -Wall -Wextra -Werror -g -pthread -Iincludes/ -o obj/main.o src/main.c",
+        "directory": "/home/denis/Github/Philosophers/philo",
+        "file": "/home/denis/Github/Philosophers/philo/src/main.c"
     }
 ]

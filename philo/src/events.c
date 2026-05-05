@@ -14,35 +14,50 @@
 
 //TODO: death check before each event.
 //TODO: check if death has happend after lock to exit.
-// Might need to add logic for left or right fork first to prevent deadlock!
-// need to add logic for return in the takeforks_event function
+
+int check_death(t_data *data)
+{
+  pthread_mutex_lock(&data->death_mutex);
+  if (data->death_flag == 1)
+  {
+    pthread_mutex_unlock(&data->death_mutex);
+    return (1);
+  }
+  pthread_mutex_unlock(&data->death_mutex);
+  return (0);
+}
 
 int	eat_event(t_data *data, t_philosopher *philo)
 {
-	printf("DEBUG: entered eat_event\n");
-	if (takeforks_event(data, philo))
-	{
-		printf("DEBUG: takeforks_event returned 1! in eat_event\n");
-		returnforks_event(data, philo);
-		return (1);
-	}
-	log_event(data, philo->id, EATING);
-	usleep(data->time_to_eat * 1000);
-	returnforks_event(data, philo);
-	return (0);
+  if (takeforks_event(data, philo))
+    return (1);
+  if (check_death(data))
+    return (1);
+  log_event(data, philo->id, EATING);
+  pthread_mutex_lock(&philo->meal_mutex);
+  philo->last_meal_timestamp = time_stamp(data);
+  philo->eat_count++;
+  pthread_mutex_unlock(&philo->meal_mutex);
+  usleep(data->time_to_eat * 1000);
+  returnforks_event(data, philo);
+  return (0);
 }
 
 int	sleep_event(t_data *data, t_philosopher *philo)
 {
-	log_event(data, philo->id, SLEEPING);
-	usleep(data->time_to_sleep * 1000);
-	return (0);
+  if (check_death(data))
+    return (1);
+  log_event(data, philo->id, SLEEPING);
+  usleep(data->time_to_sleep * 1000);
+  return (0);
 }
 
-//TODO: add fill-in time to think to use up till death margin.
+//TODO: add fill-in time to maximize use of till death margin.
 int	think_event(t_data *data, t_philosopher *philo)
 {
-	log_event(data, philo->id, THINKING);
-	usleep(2 * 1000);
-	return (0);
+  if (check_death(data))
+    return (1);
+  log_event(data, philo->id, THINKING);
+  usleep(10 * 1000);//temporary!
+  return (0);
 }

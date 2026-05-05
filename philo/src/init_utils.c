@@ -6,7 +6,7 @@
 /*   By: dprudnik <dprudnik@student.42wolfsburg.de  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 14:04:19 by dprudnik          #+#    #+#             */
-/*   Updated: 2026/04/29 14:04:51 by dprudnik         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:26:52 by dprudnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -26,4 +26,3 @@ int	create_forks(t_data *data)
 		return (-1);
 	return (0);
 }
-

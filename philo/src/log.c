@@ -6,7 +6,7 @@
 /*   By: dprudnik <dprudnik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 17:17:23 by dprudnik          #+#    #+#             */
-/*   Updated: 2026/04/29 15:38:46 by dprudnik         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:28:24 by dprudnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 unsigned long	get_time(void)
 {
 	struct timeval	tv;
-	unsigned long			time_stamp;
+	unsigned long	time_stamp;
 
 	gettimeofday(&tv, NULL);
 	time_stamp = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);

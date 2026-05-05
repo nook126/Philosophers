@@ -12,6 +12,7 @@ SRCS =	src/clean_up.c \
 		src/init_utils.c \
 		src/log.c \
 		src/main.c \
+		src/monitor.c \
 		src/utils.c
 
 OBJ_DIR = obj

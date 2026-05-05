@@ -6,7 +6,7 @@
 /*   By: dprudnik <dprudnik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:30:56 by dprudnik          #+#    #+#             */
-/*   Updated: 2026/04/29 15:40:44 by dprudnik         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:20:58 by dprudnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_mutexes(t_data *data)
 	while (i < data->philo_count)
 		pthread_mutex_init(&data->philos[i++].meal_mutex, NULL);
 	pthread_mutex_init(&data->print_mutex, NULL);
-	pthread_mutex_init(&data->death_mutex, NULL);
+	pthread_mutex_init(&data->access_mutex, NULL);
 	data->death_flag = 0;
 }
 
@@ -40,7 +40,7 @@ void	init_philos(t_data *data)
 		data->philos[i].data = data;
 		data->philos[i].left_fork = &data->forks[i % data->philo_count];
 		if (data->philo_count == 1)
-			data->philos[i].right_fork = NULL;
+			data->philos[i].right_fork = NULL;//TODO:
 		else
 			data->philos[i].right_fork = &data->forks[(i + 1)
 				% data->philo_count];
@@ -61,10 +61,8 @@ int	init_threads(t_data *data)
 		if (pthread_create(&data->philos[i].thread, NULL, &life_time,
 				&data->philos[i]) != 0)
 			return (-1);
-		// pthread_detach(data->philos[i].thread);
 		i++;
 	}
-	pthread_detach(data->monitor_thread);//using pthread_join on monitor_thread.
 	return (0);
 }
 
@@ -79,6 +77,7 @@ int	init_data(t_data *data, int argc, char **argv)
 	else
 		data->must_eat_count = 0;
 	data->start_time = get_time();
+	data->sim_stopped = 0;
 	if (create_philos(data) != 0)
 		return (-1);
 	if (create_forks(data) != 0)

@@ -21,7 +21,7 @@ int	take_left_first(t_data *data, t_philosopher *philo)
 		return (1);
 	}
 	log_event(data, philo->id, FORK_TAKEN);
-	if (data->philo_count == 1)//TODO: changed for single philo
+	if (data->philo_count == 1)
 	{
 		usleep(data->time_to_die * 2000);
 		return (0);
@@ -65,7 +65,7 @@ int	takeforks_event(t_data *data, t_philosopher *philo)
 			return (1);
 		return (0);
 	}
-	else if (philo->id % 2 == 0)//TODO: changed from else if
+	else if (philo->id % 2 == 0 && (data->philo_count != 3))
 	{
 		if (take_left_first(data, philo))
 			return (1);

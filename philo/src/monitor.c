@@ -14,6 +14,7 @@
 
 int	check_death(t_data *data, size_t i)
 {
+	pthread_mutex_lock(&data->philos[i].meal_mutex);
 	if (time_stamp(data) > (data->philos[i].last_meal_timestamp
 			+ (long)data->time_to_die))
 	{
@@ -23,6 +24,7 @@ int	check_death(t_data *data, size_t i)
 		pthread_mutex_unlock(&data->access_mutex);
 		return (1);
 	}
+	pthread_mutex_unlock(&data->philos[i].meal_mutex);
 	return (0);
 }
 
@@ -52,8 +54,8 @@ void	*monitor_thread(void *arg)
 		{
 			if (check_death(data, i))
 				return (NULL);
-			if (check_stopped(data, i))
-				return (NULL);
+			// if (check_stopped(data, i))// TODO: commented out
+			// 	return (NULL);
 			i++;
 		}
 	}

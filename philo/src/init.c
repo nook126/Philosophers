@@ -40,7 +40,7 @@ void	init_philos(t_data *data)
 		data->philos[i].data = data;
 		data->philos[i].left_fork = &data->forks[i % data->philo_count];
 		if (data->philo_count == 1)
-			data->philos[i].right_fork = NULL;//TODO:
+			data->philos[i].right_fork = NULL;
 		else
 			data->philos[i].right_fork = &data->forks[(i + 1)
 				% data->philo_count];

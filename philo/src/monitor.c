@@ -22,6 +22,7 @@ int	check_death(t_data *data, size_t i)
 		data->death_flag = 1;
 		log_event(data, data->philos[i].id, DIED);
 		pthread_mutex_unlock(&data->access_mutex);
+		pthread_mutex_unlock(&data->philos[i].meal_mutex);
 		return (1);
 	}
 	pthread_mutex_unlock(&data->philos[i].meal_mutex);
@@ -54,8 +55,8 @@ void	*monitor_thread(void *arg)
 		{
 			if (check_death(data, i))
 				return (NULL);
-			// if (check_stopped(data, i))// TODO: commented out
-			// 	return (NULL);
+			if (check_stopped(data, i))
+				return (NULL);
 			i++;
 		}
 	}

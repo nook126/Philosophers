@@ -20,11 +20,6 @@ int	check_sim_state(t_data *data)
 		pthread_mutex_unlock(&data->access_mutex);
 		return (1);
 	}
-	// if (data->sim_stopped == 1)// TODO: commented out
-	// {
-	// 	pthread_mutex_unlock(&data->access_mutex);
-	// 	return (1);
-	// }
 	pthread_mutex_unlock(&data->access_mutex);
 	return (0);
 }
@@ -59,7 +54,7 @@ int	think_event(t_data *data, t_philosopher *philo)
 	long	think_time;
 
 	think_time = ((data->time_to_die - data->time_to_eat
-		- data->time_to_sleep) / 2);
+				- data->time_to_sleep) / 2);
 	if (check_sim_state(data))
 		return (1);
 	log_event(data, philo->id, THINKING);

@@ -65,7 +65,7 @@ int	takeforks_event(t_data *data, t_philosopher *philo)
 			return (1);
 		return (0);
 	}
-	else if (philo->id % 2 == 0 && (data->philo_count != 3))
+	else if (philo->id % 2 == 0)
 	{
 		if (take_left_first(data, philo))
 			return (1);

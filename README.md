@@ -39,7 +39,7 @@
 
  ##### Ai:
 
-	-\ Ai was used to Help understand some concepts of the project like understanding what data must be mutex protected and what data does not require mutexes. Ai was also used to diagnose an issue where memory was being freed before all the threads were rejoined. In that case the chatgpt was given a printf debug lock and helped determine the issue after the (tactic of staring at the code till I find the bug was exhausted!!!).
+Ai was used to Help understand some concepts of the project like understanding what data must be mutex protected and what data does not require mutexes. Ai was also used to diagnose an issue where memory was being freed before all the threads were rejoined. In that case the chatgpt was given a printf debug lock and helped determine the issue after the (tactic of staring at the code till I find the bug was exhausted!!!).
 
  ##### Other resources used:
 
